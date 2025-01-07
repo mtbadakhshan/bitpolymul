@@ -133,6 +133,31 @@ void butterfly_net_half_inp_clmul( uint64_t * fx , unsigned n_fx )
 	}
 }
 
+// (BEGIN) THE FOLLOWING FUNCTION IS ADDED BY M. Badakhshan TO MAKE DIRECT API TO LCH FFT
+void butterfly_net_clmul( __m128i *poly , unsigned n_fx )
+{
+	if( 1 >= n_fx ) return;
+
+	unsigned log_n = __builtin_ctz( n_fx );
+
+	unsigned n_terms = n_fx;
+
+	for(unsigned i=log_n; i > 0; i--) {
+		unsigned unit = (1<<i);
+		unsigned num = n_terms / unit;
+
+		butterfly_0( poly , unit );
+		for(unsigned j=1;j<num;j++) {
+#ifdef _SIMPLE_TOWER_
+			butterfly( poly + j*unit , unit , get_s_k_a( i-1 , j ) );
+#else
+			butterfly( poly + j*unit , unit , get_s_k_a_cantor( i-1 , j*unit ) );
+			printf(" get_s_k_a_cantor( %d-1 , %d*%d ) = %d.\n", i, j, unit, get_s_k_a_cantor( i-1 , j*unit )); //Taghi Added			
+#endif
+		}
+	}
+}
+// (END) THE ABOVE FUNCTION IS ADDED BY M. Badakhshan TO MAKE DIRECT API TO LCH FFT
 
 
 void i_butterfly_net_clmul( uint64_t * fx , unsigned n_fx )

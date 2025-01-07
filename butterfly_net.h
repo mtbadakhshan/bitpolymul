@@ -35,6 +35,13 @@ void butterfly_net_half_inp( uint64_t * fx , unsigned n_fx );
 void i_butterfly_net( uint64_t * fx , unsigned n_fx );
 
 
+// (BEGIN) THE FOLLOWING FUNCTION IS ADDED BY M. Badakhshan TO MAKE DIRECT API TO LCH FFT
+#include <emmintrin.h> 
+#include <immintrin.h> 
+void butterfly_net_clmul( __m128i *poly , unsigned n_fx ); 
+// (END) THE ABOVE FUNCTION IS ADDED BY M. Badakhshan TO MAKE DIRECT API TO LCH FFT
+
+
 void butterfly_net_half_inp_clmul( uint64_t * fx , unsigned n_fx );
 
 void i_butterfly_net_clmul( uint64_t * fx , unsigned n_fx );
