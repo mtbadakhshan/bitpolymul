@@ -152,7 +152,6 @@ void butterfly_net_clmul( __m128i *poly , unsigned n_fx )
 			butterfly( poly + j*unit , unit , get_s_k_a( i-1 , j ) );
 #else
 			butterfly( poly + j*unit , unit , get_s_k_a_cantor( i-1 , j*unit ) );
-			printf(" get_s_k_a_cantor( %d-1 , %d*%d ) = %d.\n", i, j, unit, get_s_k_a_cantor( i-1 , j*unit )); //Taghi Added			
 #endif
 		}
 	}
