@@ -11,7 +11,7 @@ LIBS=    #-lm -lcrypto -lgf2x
 
 
 OBJ= bc.o bitpolymul.o encode.o gf2128_tower_iso.o butterfly_net.o gf16.o ska.o gf2256_tower_iso.o gf2128_cantor_iso.o btfy.o trunc_btfy_tab.o
-EXE= bitpolymul-test #bc-test
+EXE= bitpolymul-test.out #bc-test
 
 
 CSRC= $(wildcard *.cpp)
